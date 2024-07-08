@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Suggest</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<style>
+    .search-container {
+        position: relative;
+        width: 100%;
+        text-align: right;
+        padding-top: 8px;
+    }
+
+    .suggestions {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        border: 1px solid #ddd;
+        background-color: white;
+        max-height: 200px;
+        overflow-y: auto;
+        display: none;
+    }
+
+    .suggestion {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .suggestion:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+
+<body>
+
+    <nav>
+        <div class="logo">MyWebsite</div>
+        <div class="menu">
+            <a href="../index.html">Home</a>
+            <a href="../img-lazyload/lazy-load.html">Img lazyload</a>
+            <a href="../card/card.html">Card</a>
+            <a href="../dark-mode/dark-mode.html">Dark Mode</a>
+            <a href="#">Auto Suggest</a>
+            <a href="../modal/modal.html">Auto Suggest</a>
+            <a href="../tabs/tabs.html">Tabs</a>
+<a href="../carousel/carousel.html">Carousel</a>
+            <a href="../tooltip/tooltip.html">Tooltip</a>
+        </div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <script>
+        const suggestions = [
+            'Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape', 'Honeydew', 'Ume', 'Strawberry'
+        ];
+
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        document.getElementById('searchInput').addEventListener('input', debounce(function () {
+            const input = this.value.toLowerCase();
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = '';
+
+            if (input.length === 0) {
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+
+            const filteredSuggestions = suggestions.filter(suggestion =>
+                suggestion.toLowerCase().includes(input)
+            );
+
+            filteredSuggestions.forEach(suggestion => {
+                const suggestionElement = document.createElement('div');
+                suggestionElement.classList.add('suggestion');
+                suggestionElement.textContent = suggestion;
+                suggestionElement.addEventListener('click', function () {
+                    document.getElementById('searchInput').value = suggestion;
+                    suggestionsContainer.style.display = 'none';
+                });
+                suggestionsContainer.appendChild(suggestionElement);
+            });
+
+            suggestionsContainer.style.display = 'block';
+        }, 300));
+
+    </script>
+
+</body>
+
+</html>

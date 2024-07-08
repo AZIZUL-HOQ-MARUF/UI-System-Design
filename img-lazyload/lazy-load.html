@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Lazy load</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        h3 {
+            text-align: center;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .lazy-load {
+            height: 400px;
+            width: 400px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">MyWebsite</div>
+        <div class="menu">
+            <a href="../index.html">Home</a>
+            <a href="#lazy">Img lazyload</a>
+            <a href="../card/card.html">Card</a>
+            <a href="../dark-mode/dark-mode.html">Dark Mode</a>
+            <a href="../auto-suggest/suggest.html">Auto Suggest</a>
+            <a href="../modal/modal.html">Auto Suggest</a>
+            <a href="../tabs/tabs.html">Tabs</a>
+            <a href="../carousel/carousel.html">Carousel</a>
+            <a href="../tooltip/tooltip.html">Tooltip</a>
+        </div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+
+    <h3>Lazy Loaded Imgs</h3>
+    <div>
+        <img data-src="tiger.avif" alt="Image 1" class="lazy-load">
+        <img data-src="panda.webp" alt="Image 2" class="lazy-load">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy-load"));
+
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.add("loaded");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(function (lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver
+                let lazyLoadThrottleTimeout;
+                function lazyLoad() {
+                    if (lazyLoadThrottleTimeout) {
+                        clearTimeout(lazyLoadThrottleTimeout);
+                    }
+
+                    lazyLoadThrottleTimeout = setTimeout(function () {
+                        let scrollTop = window.pageYOffset;
+                        lazyImages.forEach(function (img) {
+                            if (img.offsetTop < window.innerHeight + scrollTop) {
+                                img.src = img.dataset.src;
+                                img.classList.add("loaded");
+                            }
+                        });
+                        if (lazyImages.length == 0) {
+                            document.removeEventListener("scroll", lazyLoad);
+                            window.removeEventListener("resize", lazyLoad);
+                            window.removeEventListener("orientationchange", lazyLoad);
+                        }
+                    }, 20);
+                }
+
+                document.addEventListener("scroll", lazyLoad);
+                window.addEventListener("resize", lazyLoad);
+                window.addEventListener("orientationchange", lazyLoad);
+            }
+        });
+
+    </script>
+</body>
+
+</html>

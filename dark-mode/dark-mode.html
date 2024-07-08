@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode</title>
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        body.dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        p {
+            font-size: 1.25em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">MyWebsite</div>
+        <div class="menu">
+            <a href="../index.html">Home</a>
+            <a href="../img-lazyload/lazy-load.html">Img lazyload</a>
+            <a href="../card/">Card</a>
+            <a href="#contact">Dark Mode</a>
+            <a href="../auto-suggest/suggest.html">Auto Suggest</a>
+            <a href="../modal/modal.html">Auto Suggest</a>
+            <a href="../tabs/tabs.html">Tabs</a>
+            <a href="../carousel/carousel.html">Carousel</a>
+            <a href="../tooltip/tooltip.html">Tooltip</a>
+        </div>
+        <button id="darkModeToggle">Dark</button>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+</body>
+
+
+<div>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque euismod nisi a magna interdum, sed luctus
+        est tincidunt. Curabitur gravida euismod magna, nec interdum arcu elementum a. Maecenas nec magna vel turpis
+        scelerisque lacinia. Ut eu lorem a arcu fermentum convallis. Integer non erat vitae odio tincidunt
+        dignissim. Donec sagittis nisl eu justo scelerisque, a tincidunt lacus scelerisque. Vivamus placerat odio ac
+        justo aliquet, sit amet dictum erat vehicula. Aenean ut purus et est aliquet commodo. Fusce cursus, elit sit
+        amet congue vulputate, nunc nisl ullamcorper tortor, eget porta ligula tortor et erat. Vestibulum imperdiet
+        varius justo ac lacinia.
+        <br><br>
+
+        Sed venenatis tristique metus, sit amet cursus sem placerat id. Proin molestie orci eget massa bibendum,
+        quis elementum leo fermentum. Integer fermentum velit non lectus interdum, nec congue lacus venenatis. Nulla
+        facilisi. Vivamus suscipit fermentum magna, a venenatis arcu tristique et. Duis vel justo dolor. Nulla
+        facilisi. Nullam vulputate ligula ut sapien elementum, non ultricies nisi vestibulum. Quisque viverra, ipsum
+        in pellentesque luctus, lorem est vehicula est, nec efficitur orci orci a neque. Curabitur id malesuada leo,
+        sed feugiat dolor. Phasellus imperdiet, orci in dictum sollicitudin, magna est aliquam magna, id vulputate
+        ipsum felis at risus. Mauris scelerisque ligula ac enim bibendum, nec tempus nunc aliquet. Integer tempor
+        nulla sit amet dui luctus scelerisque.
+
+        <br><br>
+
+        Nullam ultricies arcu ac tellus pretium, non fermentum nulla volutpat. Integer fermentum ac turpis quis
+        scelerisque. Suspendisse fringilla magna sit amet eros varius, id sodales sem rutrum. Suspendisse venenatis orci
+        et diam fermentum, ac faucibus magna placerat. Nulla facilisi. Aenean consequat arcu et urna scelerisque, et
+        interdum libero tincidunt. Sed id est ligula. Nulla facilisi. Donec laoreet gravida eros nec scelerisque. Cras
+        ac consectetur leo. Proin venenatis tortor vel urna dignissim ultricies. Cras a convallis enim, sit amet
+        facilisis mauris. Fusce scelerisque venenatis sapien id blandit. Cras imperdiet urna sed tellus pulvinar, nec
+        aliquet justo feugiat.
+    </p>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleButton = document.getElementById('darkModeToggle');
+        const currentMode = localStorage.getItem('mode') || 'light-mode';
+        document.body.classList.add(currentMode);
+
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+            const newMode = document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
+            localStorage.setItem('mode', newMode);
+            if (newMode == 'dark-mode') {
+                toggleButton.innerText = 'Light';
+            } else {
+                toggleButton.innerText = 'Dark';
+            }
+        });
+    });
+
+</script>
+
+</html>

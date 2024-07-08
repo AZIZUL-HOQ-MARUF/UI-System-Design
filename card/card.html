@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card</title>
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .d-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* Creates 3 equal columns */
+            gap: 10px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+            flex: 1;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .product-name {
+            font-size: 1.25em;
+            margin: 8px 0;
+        }
+
+        .product-price {
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .buy-now {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .buy-now:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .d-grid {
+                grid-template-columns: repeat(1, 1fr);
+                /* Creates 3 equal columns */
+            }
+
+            .product-card {
+                padding: 12px;
+            }
+
+            .product-image {
+                max-width: 70%;
+                max-height: 70%;
+                height: auto;
+                border-radius: 4px;
+            }
+
+            .product-name {
+                font-size: 1.1em;
+            }
+
+            .product-price {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">MyWebsite</div>
+        <div class="menu">
+            <a href="../index.html">Home</a>
+            <a href="../img-lazyload/lazy-load.html">Img lazyload</a>
+            <a href="#card">Card</a>
+            <a href="../dark-mode/dark-mode.html">Dark Mode</a>
+            <a href="../auto-suggest/suggest.html">Auto Suggest</a>
+            <a href="../modal/modal.html">Auto Suggest</a>
+            <a href="../tabs/tabs.html">Tabs</a>
+<a href="../carousel/carousel.html">Carousel</a>
+            <a href="../tooltip/tooltip.html">Tooltip</a>
+        </div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+    <div class="d-grid">
+        <div class="product-card">
+            <img src="honeynut-squash.jpg" alt="Product Image" class="product-image">
+            <h3 class="product-name">Product Name</h3>
+            <p class="product-price">$49.99</p>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="honeynut-squash.jpg" alt="Product Image" class="product-image">
+            <h3 class="product-name">Product Name 2</h3>
+            <p class="product-price">$49.99</p>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="honeynut-squash.jpg" alt="Product Image" class="product-image">
+            <h3 class="product-name">Product Name3</h3>
+            <p class="product-price">$49.99</p>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="honeynut-squash.jpg" alt="Product Image" class="product-image">
+            <h3 class="product-name">Product Name3</h3>
+            <p class="product-price">$49.99</p>
+            <button class="buy-now">Buy Now</button>
+        </div>
+    </div>
+</body>
+
+</html>

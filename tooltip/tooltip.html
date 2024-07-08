@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tooltip {
+            position: absolute;
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">MyWebsite</div>
+        <div class="menu">
+            <a href="../index.html">Home</a>
+            <a href="../img-lazyload/lazy-load.html">Img lazyload</a>
+            <a href="../card/card.html">Card</a>
+            <a href="../dark-mode/dark-mode.html">Dark Mode</a>
+            <a href="../auto-suggest/suggest.html">Auto Suggest</a>
+            <a href="../modal/modal.html">Modal</a>
+            <a href="../tabs/tabs.html">Tabs</a>
+            <a href="../carousel/carousel.html">Carousel</a>
+            <a href="#">Tooltip</a>
+        </div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+
+    <button data-tooltip="This is a tooltip">Hover over me</button>
+    <p data-tooltip="This is a tooltip for generated text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque euismod nisi a magna interdum, sed luctus
+        est tincidunt. Curabitur gravida euismod magna, nec interdum arcu elementum a. Maecenas nec magna vel turpis
+        scelerisque lacinia. Ut eu lorem a arcu fermentum convallis.
+    </p>
+
+</body>
+<script>
+
+document.querySelectorAll('[data-tooltip]').forEach(element => {
+    const tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.textContent = element.getAttribute('data-tooltip');
+    document.body.appendChild(tooltip);
+
+    element.addEventListener('mouseenter', ()=> {
+        tooltip.style.display = 'block';
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + window.screenX + element.offsetWidth/2 - tooltip.offsetWidth/2}px`;
+        tooltip.style.top = `${rect.top + window.screenY - tooltip.offsetHeight - 5}px`;
+    });
+
+    element.addEventListener('mouseleave', ()=> {
+        tooltip.style.display = 'none';
+    });
+});
+</script>
+
+</html>

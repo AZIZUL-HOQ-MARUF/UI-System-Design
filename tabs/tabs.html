@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-link {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            outline: none;
+        }
+
+        .tab-link.active {
+            border-bottom: 1px solid #007bff;
+            color: #007bff;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">MyWebsite</div>
+        <div class="menu">
+            <a href="../index.html">Home</a>
+            <a href="../img-lazyload/lazy-load.html">Img lazyload</a>
+            <a href="../card/card.html">Card</a>
+            <a href="../dark-mode/dark-mode.html">Dark Mode</a>
+            <a href="../auto-suggest/suggest.html">Auto Suggest</a>
+            <a href="../modal/modal.html">Modal</a>
+            <a href="#tabs">Tabs</a>
+<a href="../carousel/carousel.html">Carousel</a>
+            <a href="../tooltip/tooltip.html">Tooltip</a>
+        </div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+
+    <div class="tabs">
+        <button class="tab-link active" data-tab="tab1">Tab 1</button>
+        <button class="tab-link" data-tab="tab2">Tab 2</button>
+        <button class="tab-link" data-tab="tab3">Tab 3</button>
+    </div>
+    <div id="tab1" class="tab-content active">
+        <p>Content for Tab 1</p>
+    </div>
+    <div id="tab2" class="tab-content">
+        <p>Content for Tab 2</p>
+    </div>
+    <div id="tab3" class="tab-content">
+        <p>Content for Tab 3</p>
+    </div>
+
+
+</body>
+<script>
+    document.querySelectorAll('.tab-link').forEach(button => {
+        button.addEventListener('click', () => {
+            const tabContentId = button.getAttribute('data-tab');
+
+            document.querySelectorAll('.tab-link').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            button.classList.add('active');
+            document.getElementById(tabContentId).classList.add('active');
+        });
+    });
+
+</script>
+
+</html>
